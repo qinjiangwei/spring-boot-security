@@ -3,7 +3,6 @@ package com.xueqing.demo.springbootsecurity.controller;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import com.xueqing.demo.springbootsecurity.bean.R;
 import com.xueqing.demo.springbootsecurity.bean.User;
-import com.xueqing.demo.springbootsecurity.service.UserService;
 import com.xueqing.demo.springbootsecurity.util.ConstantVal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -42,11 +41,14 @@ public class LoginController {
 
         userInfo.setUsername(username);
         userInfo.setPassword(password);
-        String s = request.getSession().getAttribute(ConstantVal.CHECK_CODE).toString();
-        if (StringUtils.isEmpty(kaptcha) || !s.equals(kaptcha)) {
-            return "redirect:login-error?error=1";
+        Object attribute = request.getSession().getAttribute(ConstantVal.CHECK_CODE);
+        if(attribute != null){
+            String s = attribute.toString();
+            System.out.println("验证码验证通过");
+            if (StringUtils.isEmpty(kaptcha) || !s.equals(kaptcha)) {
+                return "redirect:login-error?error=1";
+            }
         }
-
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(username, password);
 
 

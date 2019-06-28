@@ -29,6 +29,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Cacheable(value = "UserInfo")
     public List<User> getAllUsers() {
         return userMapper.getAllUsers();
     }
