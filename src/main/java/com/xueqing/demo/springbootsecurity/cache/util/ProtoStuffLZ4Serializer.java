@@ -1,6 +1,5 @@
-package com.xueqing.demo.springbootsecurity.config.util;
+package com.xueqing.demo.springbootsecurity.cache.util;
 
-import com.xueqing.demo.springbootsecurity.util.LZ4CompressUtil;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.SerializationException;
 
@@ -26,7 +25,7 @@ public class ProtoStuffLZ4Serializer<T> implements RedisSerializer<T> {
         }
         try {
             bytes = LZ4CompressUtil.lz4Decompress(bytes, 2048);
-            return (T)MyProtostuffUtil.deserialize(bytes);
+            return (T) MyProtostuffUtil.deserialize(bytes);
         } catch (Exception e) {
             throw new SerializationException("Protostuff 反序列化异常" + e.getMessage(), e);
         }

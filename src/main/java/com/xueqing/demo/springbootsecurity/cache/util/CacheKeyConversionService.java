@@ -1,4 +1,4 @@
-package com.xueqing.demo.springbootsecurity.config.util;
+package com.xueqing.demo.springbootsecurity.cache.util;
 
 import org.springframework.core.convert.ConversionService;
 import org.springframework.core.convert.TypeDescriptor;

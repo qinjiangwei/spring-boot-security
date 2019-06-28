@@ -1,4 +1,4 @@
-package com.xueqing.demo.springbootsecurity.config.util;
+package com.xueqing.demo.springbootsecurity.cache.util;
 
 import io.protostuff.LinkedBuffer;
 import io.protostuff.ProtostuffIOUtil;

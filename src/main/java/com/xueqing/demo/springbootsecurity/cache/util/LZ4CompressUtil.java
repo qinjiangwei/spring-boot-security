@@ -1,4 +1,4 @@
-package com.xueqing.demo.springbootsecurity.util;
+package com.xueqing.demo.springbootsecurity.cache.util;
 
 import net.jpountz.lz4.*;
 

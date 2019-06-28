@@ -1,7 +1,7 @@
-package com.xueqing.demo.springbootsecurity.config;
+package com.xueqing.demo.springbootsecurity.cache;
 
-import com.xueqing.demo.springbootsecurity.config.util.CacheKeyConversionService;
-import com.xueqing.demo.springbootsecurity.config.util.ProtoStuffLZ4Serializer;
+import com.xueqing.demo.springbootsecurity.cache.util.CacheKeyConversionService;
+import com.xueqing.demo.springbootsecurity.cache.util.ProtoStuffLZ4Serializer;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.interceptor.KeyGenerator;
