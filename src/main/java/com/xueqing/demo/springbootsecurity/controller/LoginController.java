@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.awt.image.BufferedImage;
@@ -32,16 +31,13 @@ public class LoginController {
     DefaultKaptcha defaultKaptcha;
 
     @RequestMapping(value = "/userLogin")
-    public String userLogin(HttpServletRequest request) {
+    public String userLogin(String username, String password, String kaptcha,HttpSession session) {
 
         User userInfo = new User();
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        String kaptcha = request.getParameter("kaptcha");
-
         userInfo.setUsername(username);
         userInfo.setPassword(password);
-        Object attribute = request.getSession().getAttribute(ConstantVal.CHECK_CODE);
+
+        Object attribute = session.getAttribute(ConstantVal.CHECK_CODE);
         if(attribute != null){
             String s = attribute.toString();
             System.out.println("验证码验证通过");
@@ -58,7 +54,6 @@ public class LoginController {
 
             SecurityContextHolder.getContext().setAuthentication(authenticate);
             //使用redis session共享
-            HttpSession session = request.getSession();
             session.setAttribute("SPRING_SECURITY_CONTEXT", SecurityContextHolder.getContext()); // 这个非常重要，否则验证后将无法登陆
         }catch (Exception e){
             e.printStackTrace();
@@ -72,18 +67,15 @@ public class LoginController {
 
     @RequestMapping("/captcha.jpg")
     @ResponseBody
-    public R applyCheckCode(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public R applyCheckCode(HttpServletResponse response, HttpSession session) throws IOException {
         R r = new R();
-
-        response.setHeader("Cache-Control", "no-store, no-cache");
-        response.setContentType("image/jpeg");
-
         //生成文字验证码
         String text = defaultKaptcha.createText();
         //生成图片验证码
         BufferedImage image = defaultKaptcha.createImage(text);
         //保存到session
-        request.getSession().setAttribute(ConstantVal.CHECK_CODE, text);
+        session.setAttribute(ConstantVal.CHECK_CODE, text);
+        response.setContentType("image/jpeg");
         ServletOutputStream out = response.getOutputStream();
         ImageIO.write(image, "jpg", out);
         return r;

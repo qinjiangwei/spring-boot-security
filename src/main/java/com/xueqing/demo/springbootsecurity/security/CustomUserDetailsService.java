@@ -13,7 +13,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -36,8 +35,6 @@ public class CustomUserDetailsService implements UserDetailsService {
         if (user == null) {
             throw new UsernameNotFoundException("账号不存在");
         }
-
-
         //-------------------开始授权
         List<Menu> menus = menuService.getMenusByUserId(user.getId());
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
