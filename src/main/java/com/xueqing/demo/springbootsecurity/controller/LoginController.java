@@ -45,6 +45,11 @@ public class LoginController {
         userInfo.setUsername(username);
         userInfo.setPassword(password);
 
+
+
+
+
+
         Object attribute = session.getAttribute(ConstantVal.CHECK_CODE);
         if(attribute != null){
             String s = attribute.toString();
