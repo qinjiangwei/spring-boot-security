@@ -30,6 +30,14 @@ public class LoginController {
     @Autowired
     DefaultKaptcha defaultKaptcha;
 
+    /**
+     * 登录方法
+     * @param username
+     * @param password
+     * @param kaptcha
+     * @param session
+     * @return
+     */
     @RequestMapping(value = "/userLogin")
     public String userLogin(String username, String password, String kaptcha,HttpSession session) {
 
