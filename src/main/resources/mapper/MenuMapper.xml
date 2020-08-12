@@ -7,4 +7,6 @@
 			SELECT * FROM menu m WHERE m.id IN (SELECT role_menu.menu_id FROM role_menu left join user_role ON role_menu.role_id = user_role.id where user_role.user_id = #{userId})
 	</select>
 
+
+
 </mapper>
